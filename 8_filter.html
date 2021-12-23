@@ -39,12 +39,12 @@
         "bob": {
           "height": "dalse",
           "length" : false,
-          "weight" : 2500
+          "weight" : 4500
         },
         "john": {
           "height" : true,
           "length" : 9,
-          "weight" : 2500
+          "weight" : 3500
         }
         ,
         "josh": {
@@ -61,13 +61,14 @@
       };
     firebase.database().ref('people').set(people);
     let peopleRef = firebase.database().ref('people');
-    // 路徑>>排序('屬性')>>讀取> forEach 依序撈出資料
-    peopleRef.orderByChild('height').once('value',function(snapshot){
-        // console.log(snapshot);
+    // 路徑>>排序('屬性')>過濾>讀取> forEach 依序撈出資料
+
+    //篩選資料 startAt():以上 endAt():以下 equalTo():等於
+    peopleRef.orderByChild('weight').startAt(3500).endAt(4500).once('value',function(snapshot){
         snapshot.forEach(function(item){
             console.log(item.val());
         })
-        console.log(snapshot.val());
+        // console.log(snapshot.val());
     })
       </script>
   </body>

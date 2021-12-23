@@ -43,7 +43,7 @@
         let orders = firebase.database().ref("foods")
         //進行排序 //price小至大
         orders.orderByChild("price").once("value",function(snapshot){
-            snapshot.forEach(function(item){
+            snapshot.forEach(function(item){  //這裡的forEach是firebase的語法，可依序撈出資料
                 console.log(item.val());
             })
         })
